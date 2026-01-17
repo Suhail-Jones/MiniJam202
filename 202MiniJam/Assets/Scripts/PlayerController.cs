@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public String output = "";
     private Boolean facingRight = true;
 
-    // Added variables for flipping
+    public GameObject spell;
 
     void Start()
     {
@@ -68,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
         {
             //anim.Play("Spell");
             output = "Spell";
+            GameObject spawnedSpell = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
+            spawnedSpell.transform.eulerAngles += new Vector3(0, 0, 90);
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
