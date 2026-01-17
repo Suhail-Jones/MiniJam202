@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private Animation anim;
     public String output = "";
+    private Boolean facingRight = true;
 
     void Start()
     {
@@ -19,6 +20,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        // Check horizontalInput to determine if a flip is needed
+        if (horizontalInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0 && facingRight)
+        {
+            Flip();
+        }
+
         checkAttack();
     }
 
@@ -72,5 +84,14 @@ public class PlayerMovement : MonoBehaviour
             //anim.Play("Block");
             output = "Block";
         }
+    }
+
+    // Function to flip the character's local scale
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1; // Invert the X-axis
+        transform.localScale = currentScale;
     }
 }
