@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e6eea3384ad9f4429cfad22b27ed160
+guid: 247fc3813b61f5344880861a57853479
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2905658789745470189
-    second: redbar_0
+      213: 4525979496876872988
+    second: trialevilframe_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -98,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redbar_0
+      name: trialevilframe_0
       rect:
         serializedVersion: 2
-        x: 109
-        y: 409
-        width: 442
-        height: 52
+        x: 129
+        y: 669
+        width: 1022
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dea25414649f25820800000000000000
-      internalID: 2905658789745470189
+      spriteID: c151c0c6f528fce30800000000000000
+      internalID: 4525979496876872988
       vertices: []
       indices: 
       edges: []
@@ -128,8 +128,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      redbar_0: 2905658789745470189
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

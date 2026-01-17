@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e6eea3384ad9f4429cfad22b27ed160
+guid: ee9a7ab532928d0498440979482a1162
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2905658789745470189
-    second: redbar_0
+      213: 3576932651162523933
+    second: testblack_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -98,22 +98,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: redbar_0
+      name: testblack_0
       rect:
         serializedVersion: 2
-        x: 109
-        y: 409
-        width: 442
-        height: 52
+        x: 79
+        y: 659
+        width: 1122
+        height: 162
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dea25414649f25820800000000000000
-      internalID: 2905658789745470189
+      spriteID: d19d90a7b41d3a130800000000000000
+      internalID: 3576932651162523933
       vertices: []
       indices: 
       edges: []
@@ -121,7 +121,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 57936f420b674234fa8affa11a1921e2
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +129,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      redbar_0: 2905658789745470189
+      testblack_0: 3576932651162523933
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
