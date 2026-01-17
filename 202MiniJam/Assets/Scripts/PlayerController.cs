@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public String output = "";
     private Boolean facingRight = true;
 
+    // Added variables for flipping
+    private bool facingRight = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,14 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            sprintSpeed = 1.75f;
-        }
-        else
-        {
-            sprintSpeed = 1f;
-        }
+        sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
 
         if (horizontalInput != 0)
         {
@@ -84,6 +80,15 @@ public class PlayerMovement : MonoBehaviour
             //anim.Play("Block");
             output = "Block";
         }
+    }
+
+    // Function to flip the character's local scale
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1; // Invert the X-axis
+        transform.localScale = currentScale;
     }
 
     // Function to flip the character's local scale
