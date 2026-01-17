@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,15 +7,19 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
     private Rigidbody2D rb;
     private float horizontalInput;
+    private Animation anim;
+    public String output = "";
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animation>();
     }
 
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+        checkAttack();
     }
 
     void FixedUpdate()
@@ -35,6 +40,37 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        
+    }
+
+    void checkAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            //anim.Play("Jab");
+            output = "Jab";
+        }
+        else if (Input.GetKeyDown(KeyCode.J))
+        {
+            //anim.Play("HeavyPunch");
+            output = "HeavyPunch";
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            //anim.Play("Spell");
+            output = "Spell";
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            //anim.Play("Ultimate");
+            output = "Ultimate";
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //anim.Play("Block");
+            output = "Block";
         }
     }
 }
