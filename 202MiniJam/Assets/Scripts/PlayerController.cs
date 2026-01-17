@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalInput;
 
+    // Added variables for flipping
+    private bool facingRight = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -15,18 +18,21 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        // Check horizontalInput to determine if a flip is needed
+        if (horizontalInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0 && facingRight)
+        {
+            Flip();
+        }
     }
 
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            sprintSpeed = 1.75f;
-        }
-        else
-        {
-            sprintSpeed = 1f;
-        }
+        sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
 
         if (horizontalInput != 0)
         {
@@ -36,5 +42,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+    }
+
+    // Function to flip the character's local scale
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1; // Invert the X-axis
+        transform.localScale = currentScale;
     }
 }
