@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private Boolean facingRight = true;
 
     // Added variables for flipping
-    private bool facingRight = true;
 
     void Start()
     {
@@ -80,15 +79,6 @@ public class PlayerMovement : MonoBehaviour
             //anim.Play("Block");
             output = "Block";
         }
-    }
-
-    // Function to flip the character's local scale
-    private void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 currentScale = transform.localScale;
-        currentScale.x *= -1; // Invert the X-axis
-        transform.localScale = currentScale;
     }
 
     // Function to flip the character's local scale
