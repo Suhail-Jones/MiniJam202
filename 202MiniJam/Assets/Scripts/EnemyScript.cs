@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject field;
+    public bool isStunned = false;
 
     // Update is called once per frame
     void Update()
@@ -31,21 +32,22 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator Freeze(float duration)
     {
-        if (collision.gameObject.tag == "Spell")
-        {
-            // Trigger blocking
-            Debug.Log("Blocking");
-        }
+        // Set stunned state
+        isStunned = true;
+
+        // Wait for the stun duration
+        yield return new WaitForSeconds(duration);
+
+        // End stun
+        isStunned = false;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+
+    public void block()
     {
-        if (collision.gameObject.tag == "Spell")
-        {
-            // Continued Blocking
-            Debug.Log("Still Blocking");
-        }
+        Debug.Log("Blocking");
     }
+
 }

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isStunned = false;
 
     public GameObject spell;
+    public GameObject hand;
 
     // Added variables for flipping
 
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hand.GetComponent<CircleCollider2D>().enabled = false;
     }
 
     void Update()
@@ -31,11 +33,11 @@ public class PlayerMovement : MonoBehaviour
         // Check horizontalInput to determine if a flip is needed
         if (horizontalInput > 0)
         {
-            spriteRenderer.flipX = false;
+            //spriteRenderer.flipX = false;
         }
         else if (horizontalInput < 0)
         {
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
         }
         if(isStunned == false)
         {
@@ -71,13 +73,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+            hand.GetComponent<CircleCollider2D>().enabled = true;
             anim.SetTrigger("jab");
             output = "Jab";
-            StartCoroutine(PerformAttack(0.5f));
+            StartCoroutine(Freeze(0.5f));
 
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
+            hand.GetComponent<CircleCollider2D>().enabled = true;
             //anim.Play("HeavyPunch");
             output = "HeavyPunch";
         }
@@ -87,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             output = "Spell";
             GameObject spawnedSpell = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
             spawnedSpell.transform.eulerAngles += new Vector3(0, 0, 90);
-            StartCoroutine(PerformAttack(0.5f));
+            StartCoroutine(Freeze(0.5f));
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
@@ -100,13 +104,13 @@ public class PlayerMovement : MonoBehaviour
             output = "Block";
         }
     }
-    IEnumerator PerformAttack(float attackStunDuration)
+    IEnumerator Freeze(float duration)
     {
         // Set stunned state
         isStunned = true;
 
         // Wait for the stun duration
-        yield return new WaitForSeconds(attackStunDuration);
+        yield return new WaitForSeconds(duration);
 
         // End stun
         isStunned = false;
