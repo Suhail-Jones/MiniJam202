@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8711229026469359888}
   - component: {fileID: 7554691039092531850}
-  - component: {fileID: 6940799205113552561}
   - component: {fileID: 3684737676606082616}
   - component: {fileID: 386709568422405761}
+  - component: {fileID: 2608005278240012364}
   m_Layer: 0
-  m_Name: Spell
+  m_Name: PlayerSpell
   m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6940799205113552561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8662091447128444109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2268a0d7c4a04de4994dbacf31698faa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireSpeed: 10
 --- !u!50 &3684737676606082616
 Rigidbody2D:
   serializedVersion: 4
@@ -164,3 +151,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0000002, y: 2.0000005}
   m_Direction: 0
+--- !u!114 &2608005278240012364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662091447128444109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ed40337d435db468ff0d1acf5d035e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSpeed: 10

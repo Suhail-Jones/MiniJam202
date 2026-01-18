@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+public class PlayerSpell : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private int fireSpeed;
@@ -23,7 +23,7 @@ public class Spell : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "Spell" || collision.gameObject.tag != "Spell")
+        if (collision.gameObject.tag != "Spell" && collision.gameObject.tag != "Player")
         {
             Destroy(gameObject);
         }

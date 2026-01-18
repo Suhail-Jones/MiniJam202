@@ -155,6 +155,7 @@ MonoBehaviour:
   moveSpeed: 8
   sprintSpeed: 1
   output: 
+  isStunned: 0
   spell: {fileID: 8662091447128444109, guid: 3a0f28a6e6fbb704480f76bf19a83769, type: 3}
 --- !u!70 &111209148
 CapsuleCollider2D:

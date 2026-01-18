@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public string output = "";
     private SpriteRenderer spriteRenderer;
     public bool isStunned = false;
+
+    public GameObject spell;
 
     // Added variables for flipping
 
@@ -82,6 +85,9 @@ public class PlayerMovement : MonoBehaviour
         {
             //anim.Play("Spell");
             output = "Spell";
+            GameObject spawnedSpell = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
+            spawnedSpell.transform.eulerAngles += new Vector3(0, 0, 90);
+            StartCoroutine(PerformAttack(0.5f));
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
