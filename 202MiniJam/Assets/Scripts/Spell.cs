@@ -23,6 +23,9 @@ public class Spell : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag != "Spell" || collision.gameObject.tag != "Spell")
+        {
+            Destroy(gameObject);
+        }
     }
 }
