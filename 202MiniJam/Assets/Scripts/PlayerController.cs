@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalInput;
     private Animator anim;
-    public String output = "";
-    private Boolean facingRight = true;
+    public string output = "";
     private SpriteRenderer spriteRenderer;
+    public bool isStunned = false;
 
     // Added variables for flipping
 
@@ -34,36 +34,43 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
-
-        checkAttack();
+        if(isStunned == false)
+        {
+            checkAttack();
+        }
     }
 
     void FixedUpdate()
     {
-        sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
-
-        if (horizontalInput != 0)
+        if (isStunned == false)
         {
-            rb.velocity = new Vector2(horizontalInput * moveSpeed * sprintSpeed, rb.velocity.y);
-            anim.SetBool("isWalking", true);
+            sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
+
+            if (horizontalInput != 0)
+            {
+                rb.velocity = new Vector2(horizontalInput * moveSpeed * sprintSpeed, rb.velocity.y);
+                anim.SetBool("isWalking", true);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                anim.SetBool("isWalking", false);
+            }
         }
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetBool("isWalking", false);
         }
-
-        
     }
 
     void checkAttack()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Vector3 tran = transform.position;
             anim.SetTrigger("jab");
             output = "Jab";
-            transform.position = tran;
+            StartCoroutine(PerformAttack(0.5f));
 
         }
         else if (Input.GetKeyDown(KeyCode.J))
@@ -87,13 +94,15 @@ public class PlayerMovement : MonoBehaviour
             output = "Block";
         }
     }
-
-    // Function to flip the character's local scale
-    private void Flip()
+    IEnumerator PerformAttack(float attackStunDuration)
     {
-        facingRight = !facingRight;
-        Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1; // Invert the X-axis
-        gameObject.transform.localScale = currentScale;
+        // Set stunned state
+        isStunned = true;
+
+        // Wait for the stun duration
+        yield return new WaitForSeconds(attackStunDuration);
+
+        // End stun
+        isStunned = false;
     }
 }
