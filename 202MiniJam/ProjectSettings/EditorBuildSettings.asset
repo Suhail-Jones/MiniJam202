@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Arena.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Enemies.unity
+    guid: 801793b3ab7e8e6498546b0261c6a572
+  - enabled: 1
+    path: Assets/Scenes/Player.unity
+    guid: 8a820db3f19b5114ab58e595b50d1456
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
