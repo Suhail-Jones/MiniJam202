@@ -7,16 +7,18 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
     private Rigidbody2D rb;
     private float horizontalInput;
-    private Animation anim;
+    private Animator anim;
     public String output = "";
     private Boolean facingRight = true;
+    private SpriteRenderer spriteRenderer;
 
-    public GameObject spell;
+    // Added variables for flipping
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -24,13 +26,13 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         // Check horizontalInput to determine if a flip is needed
-        if (horizontalInput > 0 && !facingRight)
+        if (horizontalInput > 0)
         {
-            Flip();
+            spriteRenderer.flipX = false;
         }
-        else if (horizontalInput < 0 && facingRight)
+        else if (horizontalInput < 0)
         {
-            Flip();
+            spriteRenderer.flipX = true;
         }
 
         checkAttack();
@@ -43,10 +45,12 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0)
         {
             rb.velocity = new Vector2(horizontalInput * moveSpeed * sprintSpeed, rb.velocity.y);
+            anim.SetBool("isWalking", true);
         }
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
+            anim.SetBool("isWalking", false);
         }
 
         
@@ -56,8 +60,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            //anim.Play("Jab");
+            Vector3 tran = transform.position;
+            anim.SetTrigger("jab");
             output = "Jab";
+            transform.position = tran;
+
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
@@ -68,8 +75,6 @@ public class PlayerMovement : MonoBehaviour
         {
             //anim.Play("Spell");
             output = "Spell";
-            GameObject spawnedSpell = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
-            spawnedSpell.transform.eulerAngles += new Vector3(0, 0, 90);
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
@@ -87,8 +92,8 @@ public class PlayerMovement : MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 currentScale = transform.localScale;
+        Vector3 currentScale = gameObject.transform.localScale;
         currentScale.x *= -1; // Invert the X-axis
-        transform.localScale = currentScale;
+        gameObject.transform.localScale = currentScale;
     }
 }
