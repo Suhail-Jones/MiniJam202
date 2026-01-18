@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Spell
+  - Circle
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
@@ -42,4 +43,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1Sky
+    uniqueID: 1630590963
+    locked: 0
+  - name: 2Clouds
+    uniqueID: 3512482213
+    locked: 0
+  - name: 3Ground
+    uniqueID: 3033751717
+    locked: 0
+  - name: Player
+    uniqueID: 694211537
+    locked: 0
+  - name: 4Foreground
+    uniqueID: 3787533615
     locked: 0

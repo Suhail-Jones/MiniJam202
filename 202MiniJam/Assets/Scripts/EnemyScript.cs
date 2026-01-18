@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject field;
+    public Collider2D coll;
 
     // Update is called once per frame
     void Update()
@@ -33,7 +34,8 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Spell")
+        Debug.Log(gameObject.tag);
+        if (collision.gameObject.tag == "Spell" && gameObject.tag == "Circle")
         {
             // Trigger blocking
             Debug.Log("Blocking");
@@ -42,10 +44,18 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //Debug.Log(gameObject.tag);
         if (collision.gameObject.tag == "Spell")
         {
             // Continued Blocking
             Debug.Log("Still Blocking");
         }
     }
+
+    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Hit");
+    }    
 }
