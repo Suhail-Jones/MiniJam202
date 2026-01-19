@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Hand
   - Enemy
   - Spell
-  - Circle
+  - Ultimate
+  - EnemyCircles
+  - Shield
   layers:
   - Default
   - TransparentFX
