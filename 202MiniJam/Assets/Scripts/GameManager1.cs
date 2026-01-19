@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager1 : MonoBehaviour
 {
     public GameObject player;
     public PlayerMovement playerS;
     public string endLine;
     public bool fightEnd = false;
-
-    public GameObject enemy1;
-    public GameObject enemy2;
-    public GameObject enemy3;
-    public GameObject enemy4;
-    public GameObject enemy5;
-
-    private int index;
 
     void Awake()
     {
@@ -88,27 +80,6 @@ public class GameManager : MonoBehaviour
             ehb.SetHealth(enemyHealth);
             hb.SetHealth(playerHealth);
 
-            if (index == 1)
-            {
-                Instantiate(enemy1, new Vector3(), Quaternion.identity);
-            }
-            else if (index == 2)
-            {
-                Instantiate(enemy2, new Vector3(), Quaternion.identity);
-            }
-            else if (index == 3)
-            {
-                Instantiate(enemy3, new Vector3(), Quaternion.identity);
-            }
-            else if (index == 4)
-            {
-                Instantiate(enemy4, new Vector3(), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(enemy5, new Vector3(), Quaternion.identity);
-            }
-
             if (fightEnd)
             {
                 fightEnd = false;
@@ -118,78 +89,23 @@ public class GameManager : MonoBehaviour
                 gameplayRoot.SetActive(true);
             }
         }
-
-        // Coin Flip
-        if (SceneManager.GetActiveScene().buildIndex == 4)
-        {
-            float countdown = 3f;
-
-            countdown = countdown - Time.deltaTime;
-
-            if (countdown < 0)
-            {
-                int rand = Random.Range(0, 2);
-
-                if (rand == 0)
-                {
-                    SceneManager.LoadScene(5, LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync(4);
-                }
-                else
-                {
-                    SceneManager.LoadScene(6, LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync(4);
-                }
-            }
-        }
-
-        // Win Screen
-        if (SceneManager.GetActiveScene().buildIndex == 5)
-        {
-            float countdown = 3f;
-
-            countdown = countdown - Time.deltaTime;
-
-            if (countdown < 0)
-            {
-                GameObject gameplayRoot = GameObject.Find("GameplayRoot");
-                gameplayRoot.SetActive(true);
-                SceneManager.UnloadSceneAsync(5);
-            }
-        }
-
-        // Loss Screen
-        if (SceneManager.GetActiveScene().buildIndex == 6)
-        {
-            float countdown = 3f;
-
-            countdown = countdown - Time.deltaTime;
-
-            if (countdown < 0)
-            {
-                SceneManager.LoadScene(3, LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync(5);
-            }
-        }
     }
 
-    public void StartFight(int index1, Interaction goS)
+    public void StartFight(int index, Interaction goS)
     {
-        index = index1;
-
-        if (index1 == 1)
+        if (index == 1)
         {
             endLine = "You may have bested me, but there is more to come..";
         }
-        else if (index1 == 2)
+        else if (index == 2)
         {
             endLine = "Just wait..till I get..my hands..on you";
         }
-        else if (index1 == 3)
+        else if (index == 3)
         {
             endLine = "W-where did you get all that power from..";
         }
-        else if (index1 == 4)
+        else if (index == 4)
         {
             endLine = "The boss won't be happy about this..";
         }
@@ -206,7 +122,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        SceneManager.LoadScene(4, LoadSceneMode.Additive);
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
 
         GameObject gameplayRoot = GameObject.Find("GameplayRoot");
         gameplayRoot.SetActive(false);

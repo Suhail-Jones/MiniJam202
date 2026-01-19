@@ -1,18 +1,31 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class SignInteraction : MonoBehaviour
+public class Interaction : MonoBehaviour
 {
     public GameObject ePrompt;
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
+    public bool enemy;
+    public GameObject wall;
+
+    public int index;
+    public GameManager gm;
 
     [TextArea]
     public string[] lines;
+    public string[] nameL;
 
     private int currentLine = 0;
     private bool playerNearby = false;
     private bool dialogueActive = false;
+
+    void Start()
+    {
+        gm = GetComponent<GameManager>();
+    }
 
     void Update()
     {
@@ -37,19 +50,27 @@ public class SignInteraction : MonoBehaviour
         dialoguePanel.SetActive(true);
         ePrompt.SetActive(false);
         dialogueText.text = lines[currentLine];
+        nameText.text = nameL[currentLine];
     }
 
     void NextLine()
     {
         currentLine++;
 
-        if (currentLine >= lines.Length)
+        if (currentLine >= lines.Length && enemy == false)
         {
             EndDialogue();
+        }
+        else if (currentLine >= lines.Length && enemy == true)
+        {
+            EndDialogue();
+            wall.SetActive(false);
+            gm.StartFight(index, this);
         }
         else
         {
             dialogueText.text = lines[currentLine];
+            nameText.text = nameL[currentLine];
         }
     }
 
@@ -64,8 +85,6 @@ public class SignInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered by: " + other.name);
-
         if (other.CompareTag("Player"))
         {
             playerNearby = true;
