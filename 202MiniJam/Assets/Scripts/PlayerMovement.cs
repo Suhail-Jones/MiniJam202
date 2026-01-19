@@ -23,22 +23,13 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hand.GetComponent<CircleCollider2D>().enabled = false;
+        hand.GetComponent<DamagingObject>().setDamage(0);
     }
 
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // Check horizontalInput to determine if a flip is needed
-        if (horizontalInput > 0)
-        {
-            //spriteRenderer.flipX = false;
-        }
-        else if (horizontalInput < 0)
-        {
-            //spriteRenderer.flipX = true;
-        }
         if(isStunned == false)
         {
             checkAttack();
@@ -73,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            hand.GetComponent<CircleCollider2D>().enabled = true;
+            hand.GetComponent<DamagingObject>().setDamage(1);
             anim.SetTrigger("jab");
             output = "Jab";
             StartCoroutine(Freeze(0.5f));
@@ -81,9 +72,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
-            hand.GetComponent<CircleCollider2D>().enabled = true;
+            hand.GetComponent<DamagingObject>().setDamage(3);
             //anim.Play("HeavyPunch");
             output = "HeavyPunch";
+
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
@@ -111,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Wait for the stun duration
         yield return new WaitForSeconds(duration);
+
+        hand.GetComponent<DamagingObject>().setDamage(0);
 
         // End stun
         isStunned = false;

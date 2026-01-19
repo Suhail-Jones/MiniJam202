@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class EnemySpell : MonoBehaviour
 {
@@ -21,9 +22,9 @@ public class EnemySpell : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "Spell" && collision.gameObject.tag != "Enemy")
+        if (collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }

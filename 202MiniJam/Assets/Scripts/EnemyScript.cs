@@ -47,7 +47,6 @@ public class EnemyScript : MonoBehaviour
 
     public void block()
     {
-        Debug.Log("Blocking");
-    }
 
+    }
 }

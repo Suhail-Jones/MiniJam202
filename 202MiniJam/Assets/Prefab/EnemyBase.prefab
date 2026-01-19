@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1667501557225369371}
   - component: {fileID: 7099075316172582961}
   - component: {fileID: 7155228646846539}
+  - component: {fileID: 364233696533455222}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Enemy
@@ -170,6 +171,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   field: {fileID: 0}
   isStunned: 0
+--- !u!114 &364233696533455222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215553807941236324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12568d651a1f24147a81b1614315a778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 10
 --- !u!1 &2296009789922722620
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 2215553807941236324}
   blockTag: Ultimate
+  player: {fileID: 177816750128690040, guid: ac3b477b729620c45a94ee4cd618513b, type: 3}
 --- !u!1 &4058450740425742385
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 2215553807941236324}
   blockTag: Spell
+  player: {fileID: 177816750128690040, guid: ac3b477b729620c45a94ee4cd618513b, type: 3}
 --- !u!1 &5695006356048061178
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 2215553807941236324}
   blockTag: Hand
+  player: {fileID: 177816750128690040, guid: ac3b477b729620c45a94ee4cd618513b, type: 3}
 --- !u!1 &5757668794468034402
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,3 +816,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 2215553807941236324}
   blockTag: Hand
+  player: {fileID: 177816750128690040, guid: ac3b477b729620c45a94ee4cd618513b, type: 3}
