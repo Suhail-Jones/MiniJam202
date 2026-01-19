@@ -200,7 +200,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WaterWalk_0: 6734872474590476492
+      WaterWalk_1: -7541074858765167164
+      WaterWalk_2: -5598246591708158849
+      WaterWalk_3: -2817053141422664842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

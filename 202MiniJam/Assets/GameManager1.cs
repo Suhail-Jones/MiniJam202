@@ -10,6 +10,14 @@ public class GameManager1 : MonoBehaviour
     public string endLine;
     public bool fightEnd = false;
 
+    public GameObject enemy1;
+    public GameObject enemy2;
+    public GameObject enemy3;
+    public GameObject enemy4;
+    public GameObject enemy5;
+
+    private int index;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -69,16 +77,37 @@ public class GameManager1 : MonoBehaviour
             HealthBar ehb = enemyHealthBar.GetComponent<HealthBar>();
 
             GameObject enemy = GameObject.FindWithTag("Enemy");
-            int enemyHealth = enemy.GetComponent<Character>().currentHealth;
+            int enemyHealth = (int) enemy.GetComponent<Character>().currentHealth;
 
             GameObject playerHealthBar = GameObject.Find("Health Bar");
             HealthBar hb = playerHealthBar.GetComponent<HealthBar>();
 
             GameObject player = GameObject.FindWithTag("Player");
-            int playerHealth = player.GetComponent<Character>().currentHealth;
+            int playerHealth = (int) player.GetComponent<Character>().currentHealth;
 
             ehb.SetHealth(enemyHealth);
             hb.SetHealth(playerHealth);
+
+            if (index == 1)
+            {
+                Instantiate(enemy1, new Vector3(), Quaternion.identity);
+            }
+            else if (index == 2)
+            {
+                Instantiate(enemy2, new Vector3(), Quaternion.identity);
+            }
+            else if (index == 3)
+            {
+                Instantiate(enemy3, new Vector3(), Quaternion.identity);
+            }
+            else if (index == 4)
+            {
+                Instantiate(enemy4, new Vector3(), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(enemy5, new Vector3(), Quaternion.identity);
+            }
 
             if (fightEnd)
             {
@@ -89,23 +118,78 @@ public class GameManager1 : MonoBehaviour
                 gameplayRoot.SetActive(true);
             }
         }
+
+        // Coin Flip
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            float countdown = 3f;
+
+            countdown = countdown - Time.deltaTime;
+
+            if (countdown < 0)
+            {
+                int rand = Random.Range(0, 2);
+
+                if (rand == 0)
+                {
+                    SceneManager.LoadScene(5, LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync(4);
+                }
+                else
+                {
+                    SceneManager.LoadScene(6, LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync(4);
+                }
+            }
+        }
+
+        // Win Screen
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
+            float countdown = 3f;
+
+            countdown = countdown - Time.deltaTime;
+
+            if (countdown < 0)
+            {
+                GameObject gameplayRoot = GameObject.Find("GameplayRoot");
+                gameplayRoot.SetActive(true);
+                SceneManager.UnloadSceneAsync(5);
+            }
+        }
+
+        // Loss Screen
+        if (SceneManager.GetActiveScene().buildIndex == 6)
+        {
+            float countdown = 3f;
+
+            countdown = countdown - Time.deltaTime;
+
+            if (countdown < 0)
+            {
+                SceneManager.LoadScene(3, LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync(5);
+            }
+        }
     }
 
-    public void StartFight(int index, Interaction goS)
+    public void StartFight(int index1, Interaction goS)
     {
-        if (index == 1)
+        index = index1;
+
+        if (index1 == 1)
         {
             endLine = "You may have bested me, but there is more to come..";
         }
-        else if (index == 2)
+        else if (index1 == 2)
         {
             endLine = "Just wait..till I get..my hands..on you";
         }
-        else if (index == 3)
+        else if (index1 == 3)
         {
             endLine = "W-where did you get all that power from..";
         }
-        else if (index == 4)
+        else if (index1 == 4)
         {
             endLine = "The boss won't be happy about this..";
         }
@@ -122,7 +206,7 @@ public class GameManager1 : MonoBehaviour
             }
         }
 
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        SceneManager.LoadScene(4, LoadSceneMode.Additive);
 
         GameObject gameplayRoot = GameObject.Find("GameplayRoot");
         gameplayRoot.SetActive(false);
