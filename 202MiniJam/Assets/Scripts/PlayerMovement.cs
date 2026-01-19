@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,62 +8,75 @@ public class PlayerMovement : MonoBehaviour
     public float sprintSpeed;
     private Rigidbody2D rb;
     private float horizontalInput;
-    private Animation anim;
-    public String output = "";
-    private Boolean facingRight = true;
-
+    private Animator anim;
+    public string output = "";
+    private SpriteRenderer spriteRenderer;
+    public bool isStunned = false;
+    public GameObject shield;
     public GameObject spell;
+    public GameObject hand;
+    
+
+    // Added variables for flipping
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        hand.GetComponent<DamagingObject>().setDamage(0);
     }
 
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // Check horizontalInput to determine if a flip is needed
-        if (horizontalInput > 0 && !facingRight)
+        if(isStunned == false)
         {
-            Flip();
+            checkAttack();
         }
-        else if (horizontalInput < 0 && facingRight)
-        {
-            Flip();
-        }
-
-        checkAttack();
     }
 
     void FixedUpdate()
     {
-        sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
-
-        if (horizontalInput != 0)
+        if (isStunned == false)
         {
-            rb.velocity = new Vector2(horizontalInput * moveSpeed * sprintSpeed, rb.velocity.y);
+            sprintSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.75f : 1f;
+
+            if (horizontalInput != 0)
+            {
+                rb.velocity = new Vector2(horizontalInput * moveSpeed * sprintSpeed, rb.velocity.y);
+                anim.SetBool("isWalking", true);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                anim.SetBool("isWalking", false);
+            }
         }
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
+            anim.SetBool("isWalking", false);
         }
-
-        
     }
 
     void checkAttack()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            //anim.Play("Jab");
+            hand.GetComponent<DamagingObject>().setDamage(1);
+            anim.SetTrigger("jab");
             output = "Jab";
+            StartCoroutine(Freeze(0.5f));
+
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
+            hand.GetComponent<DamagingObject>().setDamage(3);
             //anim.Play("HeavyPunch");
             output = "HeavyPunch";
+
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
@@ -70,25 +84,38 @@ public class PlayerMovement : MonoBehaviour
             output = "Spell";
             GameObject spawnedSpell = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
             spawnedSpell.transform.eulerAngles += new Vector3(0, 0, 90);
+            StartCoroutine(Freeze(0.5f));
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            //anim.Play("Ultimate");
+            GameObject spawnedSpell1 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y+2, transform.position.z), transform.rotation);
+            GameObject spawnedSpell2 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y+1, transform.position.z), transform.rotation);
+            GameObject spawnedSpell3 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
+            spawnedSpell1.transform.eulerAngles += new Vector3(0, 0, 90);
+            spawnedSpell2.transform.eulerAngles += new Vector3(0, 0, 90);
+            spawnedSpell3.transform.eulerAngles += new Vector3(0, 0, 90);
+            StartCoroutine(Freeze(2f));
             output = "Ultimate";
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.Space))
         {
-            //anim.Play("Block");
+            shield.GetComponent<BoxCollider2D>().enabled = true;
             output = "Block";
+            StartCoroutine(Freeze(1));
         }
     }
-
-    // Function to flip the character's local scale
-    private void Flip()
+    IEnumerator Freeze(float duration)
     {
-        facingRight = !facingRight;
-        Vector3 currentScale = transform.localScale;
-        currentScale.x *= -1; // Invert the X-axis
-        transform.localScale = currentScale;
+        // Set stunned state
+        isStunned = true;
+
+        // Wait for the stun duration
+        yield return new WaitForSeconds(duration);
+
+        hand.GetComponent<DamagingObject>().setDamage(0);
+
+        // End stun
+        isStunned = false;
+        shield.GetComponent<BoxCollider2D>().enabled = false;
     }
 }
