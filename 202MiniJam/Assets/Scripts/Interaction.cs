@@ -12,7 +12,7 @@ public class Interaction : MonoBehaviour
     public GameObject wall;
 
     public int index;
-    public GameManager gm;
+    public GameManager1 gm;
 
     [TextArea]
     public string[] lines;
@@ -21,11 +21,6 @@ public class Interaction : MonoBehaviour
     private int currentLine = 0;
     private bool playerNearby = false;
     private bool dialogueActive = false;
-
-    void Start()
-    {
-        gm = GetComponent<GameManager>();
-    }
 
     void Update()
     {

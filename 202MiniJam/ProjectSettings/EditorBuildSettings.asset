@@ -17,5 +17,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Arena.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/CoinFlip.unity
+    guid: fa8d410f0dad6744888b5b0710a1ea8f
+  - enabled: 1
+    path: Assets/Scenes/Win Screen.unity
+    guid: 556a79cdf7c34454a9fa707777237e34
+  - enabled: 1
+    path: Assets/Scenes/Loss Screen.unity
+    guid: 458dad888bb46b74784775f4297a55c7
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
