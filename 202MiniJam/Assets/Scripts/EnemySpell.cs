@@ -13,7 +13,7 @@ public class EnemySpell : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(fireSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(-fireSpeed, rb.velocity.y);
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class EnemySpell : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Spell" || collision.gameObject.tag == "Shield")
         {
             Destroy(gameObject);
         }

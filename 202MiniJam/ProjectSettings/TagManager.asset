@@ -9,6 +9,7 @@ TagManager:
   - Spell
   - Ultimate
   - EnemyCircles
+  - Shield
   layers:
   - Default
   - TransparentFX

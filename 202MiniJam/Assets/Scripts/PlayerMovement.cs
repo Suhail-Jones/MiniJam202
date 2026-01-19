@@ -12,9 +12,10 @@ public class PlayerMovement : MonoBehaviour
     public string output = "";
     private SpriteRenderer spriteRenderer;
     public bool isStunned = false;
-
+    public GameObject shield;
     public GameObject spell;
     public GameObject hand;
+    
 
     // Added variables for flipping
 
@@ -87,13 +88,20 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            //anim.Play("Ultimate");
+            GameObject spawnedSpell1 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y+2, transform.position.z), transform.rotation);
+            GameObject spawnedSpell2 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y+1, transform.position.z), transform.rotation);
+            GameObject spawnedSpell3 = Instantiate(spell, new Vector3(transform.position.x + 2, transform.position.y, transform.position.z), transform.rotation);
+            spawnedSpell1.transform.eulerAngles += new Vector3(0, 0, 90);
+            spawnedSpell2.transform.eulerAngles += new Vector3(0, 0, 90);
+            spawnedSpell3.transform.eulerAngles += new Vector3(0, 0, 90);
+            StartCoroutine(Freeze(2f));
             output = "Ultimate";
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.Space))
         {
-            //anim.Play("Block");
+            shield.GetComponent<BoxCollider2D>().enabled = true;
             output = "Block";
+            StartCoroutine(Freeze(1));
         }
     }
     IEnumerator Freeze(float duration)
@@ -108,5 +116,6 @@ public class PlayerMovement : MonoBehaviour
 
         // End stun
         isStunned = false;
+        shield.GetComponent<BoxCollider2D>().enabled = false;
     }
 }

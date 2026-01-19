@@ -40,7 +40,11 @@ public class Character : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             decreaseHealth(col.gameObject.GetComponent<PlayerMovement>().hand.GetComponent<DamagingObject>().getDamage());
-            Debug.Log(col.gameObject.tag + " damaged");
+            Debug.Log(col.gameObject.tag + " attacked");
+        }
+        else if(col.gameObject.tag == "Enemy")
+        {
+            decreaseHealth(col.gameObject.GetComponent<EnemyScript>().hand.GetComponent<DamagingObject>().getDamage());
         }
 
         if (col.gameObject.CompareTag("Hand") || col.gameObject.CompareTag("Spell") || col.gameObject.CompareTag("Ultimate"))

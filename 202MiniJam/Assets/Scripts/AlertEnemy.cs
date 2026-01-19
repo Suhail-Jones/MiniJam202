@@ -9,6 +9,7 @@ public class AlertEnemy : MonoBehaviour
     public string blockTag;
     public GameObject player;
     public string block;
+    public bool isInZone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,11 @@ public class AlertEnemy : MonoBehaviour
                 enemy.GetComponent<EnemyScript>().block();
             }
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isInZone = true;
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -60,6 +66,14 @@ public class AlertEnemy : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isInZone = false;
+        }
+    }
+
+    public bool playerInZone()
+    {
+        return isInZone;
     }
 }
